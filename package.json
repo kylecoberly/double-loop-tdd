@@ -10,6 +10,7 @@
     "e2e:open": "vue-cli-service e2e:open"
   },
   "dependencies": {
+    "moment": "^2.21.0",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

@@ -1,18 +1,54 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <add-person @addPerson="addPerson"></add-person>
+        <section>
+            <h2>The Cool Table</h2>
+            <ul class="person-cards">
+                <li v-for="person in people">
+                    <person-card :person="person"></person-card>
+                </li>
+            </ul>
+        </section>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import PersonCard from "../components/PersonCard.vue";
+import AddPerson from "../components/AddPerson.vue";
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+    name: "home",
+    components: {
+        PersonCard,
+        AddPerson
+    },
+    computed: {
+        people(){
+            return this.$store.getters.peopleWithAge;
+        }
+    },
+    methods:{
+        addPerson(person){
+            console.log("person", person);
+            this.$store.dispatch("addPerson", person);
+        },
+    }
+};
 </script>
+
+<style scoped lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+.home {
+    section {
+        h2 {
+            font-weight: 300;
+        }
+        .person-cards {
+            max-width: 20rem;
+            list-style-type: none;
+            padding: 0;
+        }
+    }
+}
+</style>
